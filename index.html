@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Chọn phong bao lì xì</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:linear-gradient(135deg,#d90429,#ffba08);
+    text-align:center;
+    color:white;
+}
+
+h1{
+    margin-top:40px;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-top:60px;
+    flex-wrap:wrap;
+}
+
+/* phong bao */
+.envelope{
+    width:130px;
+    height:170px;
+    background:#e60023;
+    border-radius:12px;
+    cursor:pointer;
+    position:relative;
+    transition:0.4s;
+    box-shadow:0 10px 20px rgba(0,0,0,0.25);
+}
+
+/* nắp bao */
+.envelope:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:60px;
+    background:#c4001d;
+    clip-path: polygon(0 0,100% 0,50% 100%);
+}
+
+/* chữ */
+.envelope span{
+    position:absolute;
+    bottom:18px;
+    left:0;
+    right:0;
+    font-weight:bold;
+    font-size:22px;
+}
+
+/* hover */
+.envelope:hover{
+    transform:translateY(-10px) scale(1.05);
+}
+
+/* mở rồi */
+.open{
+    background:white;
+    color:#e60023;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.result{
+    margin-top:40px;
+    font-size:36px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🧧 Chọn một phong bao lì xì</h1>
+
+<div class="container" id="list"></div>
+
+<div class="result" id="result"></div>
+
+<script>
+
+const prizes = [
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ",
+"500.000đ"
+];
+
+// số phong bao
+const TOTAL = 16;
+
+const list = document.getElementById("list");
+
+for(let i=0;i<TOTAL;i++){
+
+    const env = document.createElement("div");
+    env.className="envelope";
+    env.innerHTML="<span>🧧</span>";
+
+    env.onclick=function(){
+
+        // nếu đã có người mở rồi thì thôi
+        if(document.querySelector(".opened")) return;
+
+        env.classList.add("open","opened");
+
+        const prize = prizes[Math.floor(Math.random()*prizes.length)];
+
+        env.innerHTML=prize;
+
+        document.getElementById("result").innerText=
+        "Chúc mừng năm mới, cung hỷ phát tài!"
+    }
+
+    list.appendChild(env);
+}
+
+</script>
+
+</body>
+</html>
